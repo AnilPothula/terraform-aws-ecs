@@ -19,7 +19,7 @@ variable "iam_instance_profile_arn" {
 variable "managed_termination_protection" {
   description = "Enables or disables container-aware termination of instances in the auto scaling group when scale-in happens. Valid values are `ENABLED` and `DISABLED`"
   type        = string
-  default     = "ENABLED"
+  default     = "DISABLED"
 }
 
 variable "instance_type" {
@@ -36,7 +36,12 @@ variable "max_size" {
 
 variable "managed_scaling" {
   description = "Managed scaling configuration for the capacity provider ASG"
-  default     = null
+  default     = {}
+}
+
+variable "spot_options" {
+  description = "Spot options for the capacity provider ASG"
+  default     = {}
 }
 
 variable "tags" {
