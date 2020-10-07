@@ -24,4 +24,6 @@ More examples can be found [here](https://github.com/coresolutions-ltd/terraform
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
-managed_scaling block definition
+capacity_providers
+
+managed_scaling
