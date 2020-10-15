@@ -4,27 +4,44 @@ variable "name" {
   default     = null
 }
 
-variable "vpc_zone_identifier" {
-  description = "A list of subnet IDs to launch EC2 resources in"
-  type        = list(string)
-  default     = []
+variable "create_capacity_provider" {
+  description = "Create an ECS cluster capacity provider and associated ASG"
+  type        = bool
+  default     = false
 }
 
-variable "iam_instance_profile_arn" {
-  description = "The IAM Instance Profile ARN to launch EC2 instance with, if not provided a minimal role and corresponding profile will be created"
+variable "create_cluster" {
+  description = "Create the ECS cluster"
+  type        = bool
+  default     = false
+}
+
+variable "create_services" {
+  description = "Create a service for each task specified"
+  type        = bool
+  default     = false
+}
+
+variable "services_cluster" {
+  description = "ARN of an existing ECS cluster for the services, if omitted and create_cluster is true the new cluster will be used"
   type        = string
   default     = null
 }
 
-variable "create_capacity_provider" {
-  description = "Create an ECS cluster capacity provider."
-  type        = bool
-  default     = true
+variable "capacity_providers" {
+  description = "List of short names for one or more capacity providers to associate with the cluster, Valid values also include `FARGATE` and `FARGATE_SPOT`"
+  default     = []
 }
 
-variable "capacity_providers" {
-  description = "Configuration of one or more capacity providers to associate with the cluster."
-  default     = {}
+variable "default_capacity_provider_strategies" {
+  description = "The default capacity provider strategies to be used by the cluster, strategies cannot contain a mix of capacity providers using Auto Scaling groups and Fargate providers"
+  default     = []
+}
+
+variable "cp_vpc_zone_identifier" {
+  description = "A list of subnet IDs to launch EC2 resources in"
+  type        = list(string)
+  default     = []
 }
 
 variable "cp_managed_termination_protection" {
@@ -74,16 +91,27 @@ variable "cp_spot_max_price" {
   default     = null
 }
 
-variable "cp_weight" {
-  description = " The relative percentage of the total number of launched tasks that should use the created capacity provider"
-  type        = number
-  default     = null
+variable "cp_associate_public_ip_address" {
+  description = "Associate a public IP address with the capacity provider network interface"
+  type        = bool
+  default     = false
 }
 
-variable "cp_base" {
-  description = "The number of tasks, at a minimum, to run on the created capacity provider."
-  type        = number
-  default     = null
+variable "cp_security_group_ids" {
+  description = "A list of security group IDs to associate the capacity provide with"
+  type        = list(string)
+  default     = []
+}
+
+variable "container_insights" {
+  description = "Enable container insights"
+  type        = bool
+  default     = false
+}
+
+variable "tasks" {
+  description = "Tasks definitions to be created, values are used to create tasks and accompanying services"
+  default     = []
 }
 
 variable "tags" {
