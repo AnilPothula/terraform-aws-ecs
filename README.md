@@ -74,7 +74,7 @@ More examples can be found [here](https://github.com/coresolutions-ltd/terraform
 | tags | Resource tags | `map(string)` | `{}` | no |
 | tasks | Tasks definitions to be created, values are used to create tasks and accompanying services | `list(object)` | `[]` | no |
 
-#
+
 ### Objects in the **default_capacity_provider_strategies** list support the following:
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
@@ -96,7 +96,7 @@ default_capacity_provider_strategies = [{
     }]
 ```
 
-#
+
 ### The **cp_managed_scaling** object supports the following:
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
@@ -105,7 +105,7 @@ default_capacity_provider_strategies = [{
 | status | Whether auto scaling is managed by ECS. Valid values are `ENABLED` and `DISABLED` | `string` | `null` | no |
 | target\_capacity | The target utilization for the capacity provider. A number between 1 and 100 | `number` | `null` | no |
 
-#
+
 ### Objects in the **tasks** list support the following:
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
@@ -143,7 +143,7 @@ default_capacity_provider_strategies = [{
 
 > In order to use `enable_ecs_managed_tags` or `propagate_tags` you must first opt in to the new Amazon Resource Name (ARN) and resource identifier (ID) formats. For more information, see [Amazon Resource Names (ARNs) and IDs](https://docs.aws.amazon.com/AmazonECS/latest/userguide/ecs-account-settings.html#ecs-resource-ids).
 
-#
+
 ### Objects in the **tasks(volumes)** list support the following:
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
@@ -161,7 +161,7 @@ volumes = [
     }]
 ```
 
-#
+
 ### The **volumes(docker_volume_configuration)** object supports the following:
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
@@ -189,7 +189,7 @@ volumes = [
     }]
 ```
 
-#
+
 ### The **volumes(efs_volume_configuration)** object supports the following:
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
@@ -199,7 +199,7 @@ volumes = [
 | transit\_encryption\_port | The port to use for transit encryption. If you do not specify a transit encryption port, it will use the port selection strategy that the Amazon EFS mount helper uses. | `number` | `null` | no |
 | authorization\_config | The authorization configuration details for the Amazon EFS file system, defined below. | `string` | `null` | no |
 
-#
+
 ### The **efs_volume_configuration(authorization_config)** object supports the following:
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
@@ -226,7 +226,7 @@ volumes = [
 
 A full example can be found [here](https://github.com/coresolutions-ltd/terraform-aws-ecs/tree/master/examples/volumes.tf).
 
-#
+
 ### Objects in the **tasks(inference_accelerators)** list support the following:
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
@@ -241,7 +241,7 @@ inference_accelerator {
 }
 ```
 
-#
+
 ### Objects in the **tasks(placement_constraints)** list support the following:
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
@@ -256,7 +256,7 @@ placement_constraints {
 }
 ```
 
-#
+
 ### The **tasks(proxy_configuration)** object supports the following:
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
@@ -279,7 +279,7 @@ proxy_configuration = {
 }
 ```
 
-#
+
 ### Objects in the **tasks(capacity_provider_strategies)** list support the following:
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
@@ -301,7 +301,7 @@ capacity_provider_strategies = [{
 ```
 A full example can be found [here](https://github.com/coresolutions-ltd/terraform-aws-ecs/tree/master/examples/fargate_strategies.tf).
 
-#
+
 ### Objects in the **tasks(load_balancers)** list support the following:
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
@@ -310,7 +310,7 @@ A full example can be found [here](https://github.com/coresolutions-ltd/terrafor
 | container\_name | The name of the container to associate with the load balancer (as it appears in a container definition). | `string` | `null` | yes |
 | container\_port | The port on the container to associate with the load balancer. | `number` | `null` | no |
 
-#
+
 ### The **tasks(network_configuration)** object supports the following:
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
@@ -327,14 +327,14 @@ network_configuration = {
 }
 ```
 
-#
+
 ### Objects in the **tasks(ordered_placement_strategy)** list support the following:
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | type | The type of placement strategy. Must be one of `binpack` `random` or `spread` | `string` | `null` | yes |
 | field | For the spread placement strategy, valid values are instanceId (or host, which has the same effect), or any platform or custom attribute that is applied to a container instance. For the binpack type, valid values are memory and cpu. For the random type, this attribute is not needed.  | `string` | `null` | no |
 
-#
+
 ### The **tasks(service_registries)** object supports the following:
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
@@ -343,7 +343,7 @@ network_configuration = {
 | container\_port | The port value, already specified in the task definition, to be used for your service discovery service. | `number` | `null` | no |
 | container\_name | The container name value, already specified in the task definition, to be used for your service discovery service. | `string` | `null` | no |
 
-#
+
 ## Outputs
 
 | Name | Description |
@@ -362,7 +362,7 @@ network_configuration = {
 | task\_arns | The Amazon Resource Names (ARN) that identify the tasks |
 | task\_families | The family of the Task Definitions |
 
-#
+---
 ## Notes
 
 If using an ASG capacity provider the instances will require external network access to communicate with the Amazon ECS service. This can be acheieved by either setting `cp_associate_public_ip_address` to true to associate public ip addresses to the instances or by using either network address translation (NAT) or PrivateLink to establish the connection.
