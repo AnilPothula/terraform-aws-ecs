@@ -13,7 +13,7 @@ module "capacity_provider_asg" {
 
   count = var.create_capacity_provider ? 1 : 0
 
-  name                     = "${local.name}"
+  name                     = "${local.name}-CP"
   vpc_zone_identifier      = var.cp_vpc_zone_identifier
   min_size                 = var.cp_min_size
   desired_capacity         = var.cp_desired_capacity
