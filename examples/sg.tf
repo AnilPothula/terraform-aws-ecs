@@ -17,16 +17,6 @@ resource "aws_security_group_rule" "http" {
   security_group_id = aws_security_group.sg.id
 }
 
-resource "aws_security_group_rule" "efs" {
-  type        = "ingress"
-  from_port   = 2049
-  to_port     = 2049
-  protocol    = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
-
-  security_group_id = aws_security_group.sg.id
-}
-
 resource "aws_security_group_rule" "allow_all" {
   type        = "egress"
   from_port   = 0

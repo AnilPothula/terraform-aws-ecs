@@ -1,0 +1,19 @@
+[{
+  "memory": 128,
+  "portMappings": [
+      {
+          "hostPort": 80,
+          "containerPort": 80,
+          "protocol": "tcp"
+      }
+  ],
+  "essential": true,
+  "mountPoints": [
+      {
+          "containerPath": "/usr/share/nginx/html",
+          "sourceVolume": "efs-wp"
+      }
+  ],
+  "name": "nginx",
+  "image": "nginx"
+}]
