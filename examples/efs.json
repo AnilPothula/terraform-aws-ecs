@@ -11,7 +11,7 @@
   "mountPoints": [
       {
           "containerPath": "/usr/share/nginx/html",
-          "sourceVolume": "efs-wp"
+          "sourceVolume": "efs"
       }
   ],
   "name": "nginx",
