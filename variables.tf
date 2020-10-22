@@ -10,6 +10,12 @@ variable "create_capacity_provider" {
   default     = false
 }
 
+variable "create_capacity_provider_role" {
+  description = "Create the capacity provider instance role and associated profile"
+  type        = bool
+  default     = false
+}
+
 variable "create_cluster" {
   description = "Create the ECS cluster"
   type        = bool
@@ -110,10 +116,9 @@ variable "cp_user_data" {
 }
 
 variable "cp_iam_instance_profile_arn" {
-  description = "IAM instance profile ARN to be used by the capacity provider instances, if omitted a basic role & profile will be created"
+  description = "IAM instance profile ARN to be used by the capacity provider instances"
   type        = string
-  default     = null
-
+  default     = false
 }
 
 variable "container_insights" {

@@ -30,12 +30,12 @@ output "cp_asg_availability_zones" {
 
 output "cp_iam_role_name" {
   description = "The capacity provider instance IAM role name"
-  value       = var.create_capacity_provider && var.cp_iam_instance_profile_arn == null ? aws_iam_role.instance_role.0.name : null
+  value       = var.create_capacity_provider_role ? aws_iam_role.cp_role.0.name : null
 }
 
 output "cp_iam_role_arn" {
   description = "The capacity provider instance IAM role Amazon Resource Name (ARN)"
-  value       = var.create_capacity_provider && var.cp_iam_instance_profile_arn == null ? aws_iam_role.instance_role.0.arn : null
+  value       = var.create_capacity_provider_role ? aws_iam_role.cp_role.0.arn : null
 }
 
 output "cluster_arn" {

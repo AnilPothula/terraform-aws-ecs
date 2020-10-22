@@ -19,7 +19,7 @@ module "capacity_provider_asg" {
   desired_capacity         = var.cp_desired_capacity
   max_size                 = var.cp_max_size
   protect_from_scale_in    = var.cp_managed_termination_protection == "ENABLED" ? true : false
-  iam_instance_profile_arn = var.cp_iam_instance_profile_arn == null ? aws_iam_instance_profile.instance_profile.0.arn : var.cp_iam_instance_profile_arn
+  iam_instance_profile_arn = var.create_capacity_provider_role ? aws_iam_instance_profile.cp_profile.0.arn : var.cp_iam_instance_profile_arn
   asg_tags                 = merge(var.tags, { "AmazonECSManaged" = "" })
 
   launch_template = {
@@ -282,9 +282,9 @@ resource "aws_ecs_service" "services" {
 }
 
 # IAM
-resource "aws_iam_role" "instance_role" {
-  count = var.create_capacity_provider && var.cp_iam_instance_profile_arn == null ? 1 : 0
-  name  = "${local.name}-Instance-Role"
+resource "aws_iam_role" "cp_role" {
+  count = var.create_capacity_provider_role ? 1 : 0
+  name  = "${local.name}-CP-Role"
 
   assume_role_policy = <<EOF
 {
@@ -301,35 +301,35 @@ resource "aws_iam_role" "instance_role" {
 }
 EOF
 
-  tags = merge(var.tags, { "Name" = "${local.name}-Instance-Role" })
+  tags = merge(var.tags, { "Name" = "${local.name}-CP-Role" })
 }
 
-resource "aws_iam_role_policy_attachment" "instance_role_ssm_core" {
-  count      = var.create_capacity_provider && var.cp_iam_instance_profile_arn == null ? 1 : 0
-  role       = aws_iam_role.instance_role.0.name
+resource "aws_iam_role_policy_attachment" "cp_role_ssm_core" {
+  count      = var.create_capacity_provider_role ? 1 : 0
+  role       = aws_iam_role.cp_role.0.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
-resource "aws_iam_role_policy_attachment" "instance_role_ssm_ec2" {
-  count      = var.create_capacity_provider && var.cp_iam_instance_profile_arn == null ? 1 : 0
-  role       = aws_iam_role.instance_role.0.name
+resource "aws_iam_role_policy_attachment" "cp_role_ssm_ec2" {
+  count      = var.create_capacity_provider_role ? 1 : 0
+  role       = aws_iam_role.cp_role.0.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM"
 }
 
-resource "aws_iam_role_policy_attachment" "instance_role_cw" {
-  count      = var.create_capacity_provider && var.cp_iam_instance_profile_arn == null ? 1 : 0
-  role       = aws_iam_role.instance_role.0.name
+resource "aws_iam_role_policy_attachment" "cp_role_cw" {
+  count      = var.create_capacity_provider_role ? 1 : 0
+  role       = aws_iam_role.cp_role.0.name
   policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
 }
 
-resource "aws_iam_role_policy_attachment" "instance_role_ecs" {
-  count      = var.create_capacity_provider && var.cp_iam_instance_profile_arn == null ? 1 : 0
-  role       = aws_iam_role.instance_role.0.name
+resource "aws_iam_role_policy_attachment" "cp_role_ecs" {
+  count      = var.create_capacity_provider_role ? 1 : 0
+  role       = aws_iam_role.cp_role.0.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
 }
 
-resource "aws_iam_instance_profile" "instance_profile" {
-  count = var.create_capacity_provider && var.cp_iam_instance_profile_arn == null ? 1 : 0
-  name  = "${local.name}-Instance-Profile"
-  role  = aws_iam_role.instance_role.0.name
+resource "aws_iam_instance_profile" "cp_profile" {
+  count = var.create_capacity_provider_role ? 1 : 0
+  name  = "${local.name}-CP-Profile"
+  role  = aws_iam_role.cp_role.0.name
 }

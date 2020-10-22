@@ -56,7 +56,7 @@ More examples can be found [here](https://github.com/coresolutions-ltd/terraform
 | container\_insights | Enable container insights | `bool` | `false` | no |
 | cp\_associate\_public\_ip\_address | Associate a public IP address with the capacity provider network interface | `bool` | `false` | no |
 | cp\_desired\_capacity | Desired capacity for the the Auto Scaling group capacity provider | `number` | `1` | no |
-| cp\_iam\_instance\_profile\_arn | IAM instance profile ARN to be used by the capacity provider instances, if omitted a basic role & profile will be created | `string` | `null` | no |
+| cp\_iam\_instance\_profile\_arn | IAM instance profile ARN to be used by the capacity provider instances | `string` | `false` | no |
 | cp\_instance\_type | The instance type used by the Auto Scaling group capacity provider | `string` | `"t3.micro"` | no |
 | cp\_managed\_scaling | Managed scaling configuration for the capacity provider ASG | `map` | `{}` | no |
 | cp\_managed\_termination\_protection | Enables or disables container-aware termination of instances in the auto scaling group when scale-in happens. Valid values are `ENABLED` and `DISABLED` | `string` | `"DISABLED"` | no |
@@ -68,6 +68,7 @@ More examples can be found [here](https://github.com/coresolutions-ltd/terraform
 | cp\_user\_data | Additional user data config for the capacity provider instances | `string` | `""` | no |
 | cp\_vpc\_zone\_identifier | A list of subnet IDs to launch EC2 resources in | `list(string)` | `[]` | no |
 | create\_capacity\_provider | Create an ECS cluster capacity provider and associated ASG | `bool` | `false` | no |
+| create\_capacity\_provider\_role | Create the capacity provider instance role and associated profile | `bool` | `false` | no |
 | create\_cluster | Create the ECS cluster | `bool` | `false` | no |
 | create\_services | Create a service for each task specified | `bool` | `false` | no |
 | default\_capacity\_provider\_strategies | The default capacity provider strategies to be used by the cluster, strategies cannot contain a mix of capacity providers using Auto Scaling groups and Fargate providers | `list` | `[]` | no |
