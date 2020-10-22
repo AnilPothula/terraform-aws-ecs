@@ -103,6 +103,19 @@ variable "cp_security_group_ids" {
   default     = []
 }
 
+variable "cp_user_data" {
+  description = "Additional user data config for the capacity provider instances"
+  type        = string
+  default     = ""
+}
+
+variable "cp_iam_instance_profile_arn" {
+  description = "IAM instance profile ARN to be used by the capacity provider instances, if omitted a basic role & profile will be created"
+  type        = string
+  default     = null
+
+}
+
 variable "container_insights" {
   description = "Enable container insights"
   type        = bool
