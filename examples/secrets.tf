@@ -6,6 +6,7 @@ module "secrets" {
   create_cluster                 = true
   create_services                = true
   create_capacity_provider       = true
+  create_capacity_provider_role  = true
   cp_instance_type               = "t3.micro"
   cp_min_size                    = 1
   cp_desired_capacity            = 1
