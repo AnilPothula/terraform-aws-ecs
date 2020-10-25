@@ -1,5 +1,5 @@
 module "wordpress" {
-  source = "./.."
+  source = "coresolutions-ltd/ecs/aws"
 
   name = "Wordpress"
 
