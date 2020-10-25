@@ -1,0 +1,37 @@
+[{
+  "name": "wordpress",
+  "image": "wordpress",
+  "memory": 256,
+  "portMappings": [
+      {
+          "hostPort": 80,
+          "containerPort": 80,
+          "protocol": "tcp"
+      }
+  ],
+  "essential": true,
+  "mountPoints": [
+    {
+        "containerPath": "/var/www/html",
+        "sourceVolume": "wordpress"
+    }
+  ],
+  "secrets": [
+    {
+        "name": "WORDPRESS_DB_HOST",
+        "valueFrom": "/wordpress/db_host"
+    },
+    {
+        "name": "WORDPRESS_DB_USER",
+        "valueFrom": "/wordpress/db_user"
+    },
+    {
+        "name": "WORDPRESS_DB_PASSWORD",
+        "valueFrom": "/wordpress/db_password"
+    },
+    {
+        "name": "WORDPRESS_DB_NAME",
+        "valueFrom": "/wordpress/db_name"
+    }
+]
+}]

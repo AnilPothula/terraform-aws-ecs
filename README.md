@@ -7,7 +7,7 @@
 
 # Elastic Container Service Terraform Module
 
-A Terraform module to provison all apects of ECS with minimal configuraiton.
+Terraform module to provision all aspects of ECS with minimal configuration.
 
 ## Getting Started
 
